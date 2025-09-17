@@ -6,7 +6,7 @@ export function BarbeariaController() {
   const barbeariaService = new BarbeariaService();
 
   // Rota para cadastrar cliente
-  router.post("/clientes", (req: Request, res: Response) => {
+  router.post("/user", (req: Request, res: Response) => {
     try {
       const { nome, telefone } = req.body;
 
@@ -189,28 +189,24 @@ export function BarbeariaController() {
   });
 
   // Rota para listar agendamentos de um cliente
-  router.get(
-    "/agendamentos/cliente/:telefone",
-    (req: Request, res: Response) => {
-      try {
-        const { telefone } = req.params;
-        const agendamentos =
-          barbeariaService.obterAgendamentosCliente(telefone);
+  router.get("/agendamentos/user/:telefone", (req: Request, res: Response) => {
+    try {
+      const { telefone } = req.params;
+      const agendamentos = barbeariaService.obterAgendamentosCliente(telefone);
 
-        const agendamentosFormatados = agendamentos.map((agendamento) => ({
-          cliente: agendamento.getCliente().getNome(),
-          barbeiro: agendamento.getBarbeiro().getNome(),
-          servico: agendamento.getServico().getNome(),
-          preco: agendamento.getServico().getPreco(),
-          dataHora: agendamento.getDataHora(),
-        }));
+      const agendamentosFormatados = agendamentos.map((agendamento) => ({
+        cliente: agendamento.getCliente().getNome(),
+        barbeiro: agendamento.getBarbeiro().getNome(),
+        servico: agendamento.getServico().getNome(),
+        preco: agendamento.getServico().getPreco(),
+        dataHora: agendamento.getDataHora(),
+      }));
 
-        res.status(200).json(agendamentosFormatados);
-      } catch (error) {
-        res.status(500).json({ erro: "Erro interno do servidor" });
-      }
+      res.status(200).json(agendamentosFormatados);
+    } catch (error) {
+      res.status(500).json({ erro: "Erro interno do servidor" });
     }
-  );
+  });
 
   // Rota para relatório de agendamentos
   router.get("/relatorio/agendamentos", (req: Request, res: Response) => {
