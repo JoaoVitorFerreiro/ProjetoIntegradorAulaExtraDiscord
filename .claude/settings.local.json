@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(npm run build:*)",
+      "Bash(pkill:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(git rm:*)",
+      "Bash(npm run:*)",
+      "Bash(TASKKILL /F /PID 28856)",
+      "Bash(wmic process where:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

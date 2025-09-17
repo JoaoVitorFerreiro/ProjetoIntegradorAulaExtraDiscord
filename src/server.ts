@@ -1,13 +1,20 @@
 import express from "express";
-import { UserController } from "./controller/UserController";
+import path from "path";
+import { BarbeariaController } from "./controller/BarbeariaController";
 
 export const app = express();
 
 app.use(express.json());
-UserController();
+
+// Servir arquivos estáticos da pasta view
+app.use(express.static(path.join(__dirname, "view")));
+
+// Configurar rotas da barbearia
+const barbeariaRouter = BarbeariaController();
+app.use(barbeariaRouter);
 
 app.get("/", (req, res) => {
-  res.send(new Date());
+  res.sendFile(path.join(__dirname, "view", "index.html"));
 });
 
 app.listen(3000, () => {
