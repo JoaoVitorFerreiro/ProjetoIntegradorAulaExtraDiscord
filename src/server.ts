@@ -6,15 +6,16 @@ export const app = express();
 
 app.use(express.json());
 
-// Servir arquivos estáticos da pasta view
-app.use(express.static(path.join(__dirname, "view")));
+// Servir arquivos estáticos da pasta public
+app.use(express.static(path.join(process.cwd(), "public")));
 
-// Configurar rotas da barbearia
+// Rotas da barbearia
 const barbeariaRouter = BarbeariaController();
 app.use(barbeariaRouter);
 
+// Rota inicial
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "index.html"));
+  res.sendFile(path.join(process.cwd(), "public", "index.html"));
 });
 
 app.listen(3000, () => {

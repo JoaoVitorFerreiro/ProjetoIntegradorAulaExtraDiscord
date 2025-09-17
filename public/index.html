@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Corte & Estilo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✂️ Barbearia Premium</h1>
+            <p>Sistema de Agendamento Profissional</p>
+        </header>
+
+        <!-- Seção de Login/Cadastro -->
+        <section id="login-section" class="section">
+            <div class="card">
+                <h2>Acesso do Cliente</h2>
+                <div class="form-group">
+                    <input type="text" id="nome-cadastro" placeholder="Nome completo">
+                    <input type="text" id="telefone-cadastro" placeholder="Telefone">
+                    <button onclick="cadastrarCliente()">Cadastrar</button>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <input type="text" id="telefone-login" placeholder="Telefone para login">
+                    <button onclick="fazerLogin()">Entrar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Principal (após login) -->
+        <section id="main-section" class="section hidden">
+            <div class="user-info">
+                <span id="user-name"></span>
+                <button onclick="logout()" class="btn-logout">Sair</button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('agendar')">Agendar Corte</button>
+                <button class="tab-btn" onclick="showTab('meus-agendamentos')">Meus Agendamentos</button>
+                <button class="tab-btn" onclick="showTab('relatorios')">Relatórios</button>
+            </div>
+
+            <!-- Tab Agendar -->
+            <div id="tab-agendar" class="tab-content active">
+                <div class="card">
+                    <h3>Novo Agendamento</h3>
+                    
+                    <div class="form-group">
+                        <label>Serviços Disponíveis:</label>
+                        <div id="servicos-list" class="options-list"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Barbeiros:</label>
+                        <div id="barbeiros-list" class="options-list"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data:</label>
+                        <input type="date" id="data-agendamento">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Horários Disponíveis:</label>
+                        <div id="horarios-list" class="options-list"></div>
+                        <button onclick="buscarHorarios()" class="btn-buscar-horarios">🔍 Buscar Horários</button>
+                    </div>
+
+                    <button onclick="confirmarAgendamento()" class="btn-primary" id="btn-confirmar" disabled>
+                        Confirmar Agendamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Meus Agendamentos -->
+            <div id="tab-meus-agendamentos" class="tab-content">
+                <div class="card">
+                    <h3>Meus Agendamentos</h3>
+                    <div id="meus-agendamentos-list"></div>
+                </div>
+            </div>
+
+            <!-- Tab Relatórios -->
+            <div id="tab-relatorios" class="tab-content">
+                <div class="card">
+                    <h3>Relatórios</h3>
+                    <div class="relatorio-buttons">
+                        <button onclick="carregarTodosAgendamentos()">Todos os Agendamentos</button>
+                        <button onclick="carregarFaturamento()">Faturamento por Barbeiro</button>
+                    </div>
+                    <div id="relatorio-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensagens -->
+        <div id="message" class="message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
